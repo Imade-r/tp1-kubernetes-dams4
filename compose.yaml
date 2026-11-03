@@ -1,0 +1,43 @@
+services:
+  a:
+    build: ./a
+    ports:
+      - "18080:8080"
+    environment:
+      SERVICE_B_URL: "http://b:8080"
+    depends_on:
+      b:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request;urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  b:
+    build: ./b
+    environment:
+      SERVICE_C_URL: "http://c:3000"
+    depends_on:
+      c:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
+
+  c:
+    build: ./c
+    volumes:
+      - counter-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  counter-data:
