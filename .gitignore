@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+.idea/
+*.iml
+.vscode/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Fichiers d'environnement et secrets
+.env
+.env.*
+*.pem
+*.key
+*.tar
+
+# Kubernetes / Cluster local
+kubeconfig
+.kube/
+
+# Système
+.DS_Store
+Thumbs.db
