@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: chaine-monitor
+  namespace: chaine-tp
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels: { monitored: "true" }
+  endpoints:
+    - { port: http, path: /metrics, interval: 15s }
