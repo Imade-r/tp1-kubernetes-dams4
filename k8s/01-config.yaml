@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: chaine-tp
+data:
+  SERVICE_B_URL: "http://b.chaine-tp.svc.cluster.local:8080"
+  SERVICE_C_URL: "http://c.chaine-tp.svc.cluster.local:3000"
